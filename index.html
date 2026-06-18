@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva: Publicar en GitHub Pages</title>
+    <title>Guía Interactiva: De Arena AI a GitHub Pages</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -61,6 +61,9 @@
         .glow-green {
             box-shadow: 0 0 25px -5px rgba(46, 160, 67, 0.2);
         }
+        .glow-blue {
+            box-shadow: 0 0 25px -5px rgba(88, 166, 255, 0.15);
+        }
     </style>
 </head>
 <body class="bg-github-darker text-slate-100 font-sans min-h-screen flex flex-col antialiased">
@@ -71,23 +74,26 @@
             <div class="flex items-center space-x-3">
                 <i class="fa-brands fa-github text-3xl text-white"></i>
                 <span class="font-bold text-lg tracking-tight hidden sm:inline-block">
-                    Git<span class="text-github-purple">Pages</span> <span class="text-xs font-mono font-normal bg-github-border px-2 py-0.5 rounded ml-2">v1.0</span>
+                    Arena<span class="text-github-purple">To</span>Pages <span class="text-xs font-mono font-normal bg-github-border px-2 py-0.5 rounded ml-2">v1.2</span>
                 </span>
             </div>
             
+            <!-- Tab Navigation inside header -->
+            <div class="flex bg-github-darker border border-github-border p-1 rounded-xl">
+                <button id="tab-guide" onclick="switchTab('guide')" class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-200 bg-github-purple text-github-darker">
+                    <i class="fa-solid fa-list-check mr-1.5"></i>Guía Interactiva
+                </button>
+                <button id="tab-prompts" onclick="switchTab('prompts')" class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-200">
+                    <i class="fa-solid fa-terminal mr-1.5"></i>Ejemplos Prompts
+                </button>
+            </div>
+
             <!-- Overall Progress Bar in Header -->
-            <div class="flex items-center space-x-3 w-1/3 sm:w-1/2 max-w-xs">
-                <div class="w-full bg-github-border h-2 rounded-full overflow-hidden">
+            <div id="progress-container" class="flex items-center space-x-3 w-1/4 max-w-[150px] sm:max-w-none">
+                <div class="w-full bg-github-border h-2 rounded-full overflow-hidden hidden md:block">
                     <div id="header-progress" class="bg-gradient-to-r from-github-purple to-github-blue h-full w-0 transition-all duration-500"></div>
                 </div>
                 <span id="progress-percent" class="text-xs font-mono font-bold text-github-blue">0%</span>
-            </div>
-
-            <div class="flex items-center space-x-2">
-                <a href="#tutorial-start" class="bg-github-card border border-github-border text-xs px-3 py-1.5 rounded-lg hover:bg-github-border transition flex items-center space-x-2">
-                    <i class="fa-solid fa-play text-github-purple"></i>
-                    <span class="hidden md:inline">Comenzar</span>
-                </a>
             </div>
         </div>
     </header>
@@ -100,31 +106,31 @@
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <div class="inline-flex items-center space-x-2 bg-github-card border border-github-border px-3 py-1.5 rounded-full text-xs text-github-purple mb-6 glow-purple">
                 <i class="fa-solid fa-bolt-lightning"></i>
-                <span>Guía ultra rápida para la IA Arena y creadores</span>
+                <span>Creación con IA + Publicación Web Gratuita</span>
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                Publica tu web en <br>
+                De Arena AI a <br>
                 <span class="bg-gradient-to-r from-github-purple via-github-blue to-emerald-400 bg-clip-text text-transparent">GitHub Pages</span>
             </h1>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
-                Sube tu web estática (HTML, CSS, JS) en minutos de forma gratuita. Diseñado especialmente para desplegar rápidamente páginas generadas por IA.
+            <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-8">
+                Diseña tu portal web en segundos con el agente inteligente de Arena AI y súbelo a internet de forma 100% gratuita. Todo desde un único tutorial interactivo.
             </p>
             
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#tutorial-start" class="bg-github-accent hover:bg-github-accentHover text-white px-6 py-3 rounded-lg font-semibold transition flex items-center space-x-2 glow-green">
+                <button onclick="switchTab('guide')" class="bg-github-accent hover:bg-github-accentHover text-white px-6 py-3 rounded-lg font-semibold transition flex items-center space-x-2 glow-green">
                     <span>Empezar Tutorial</span>
                     <i class="fa-solid fa-arrow-down"></i>
-                </a>
-                <button onclick="resetAllProgress()" class="bg-github-card border border-github-border hover:border-red-500/50 text-slate-400 hover:text-red-400 px-4 py-3 rounded-lg text-sm transition flex items-center space-x-2">
-                    <i class="fa-solid fa-rotate-left"></i>
-                    <span>Reiniciar progreso</span>
+                </button>
+                <button onclick="switchTab('prompts')" class="bg-github-card border border-github-border hover:border-github-purple/50 text-slate-300 hover:text-white px-5 py-3 rounded-lg text-sm transition flex items-center space-x-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-github-purple"></i>
+                    <span>Ver Ejemplos de Prompts</span>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Main Container -->
-    <main id="tutorial-start" class="max-w-6xl mx-auto px-4 py-12 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- VIEW 1: INTERACTIVE GUIDE (DEFAULT VIEW) -->
+    <div id="view-guide" class="max-w-6xl mx-auto px-4 py-12 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         <!-- Left Column: Navigation & Prerequisites Checklist -->
         <div class="lg:col-span-4 space-y-6">
@@ -145,15 +151,15 @@
                     <label class="flex items-start space-x-3 p-3 bg-github-card rounded-lg border border-github-border cursor-pointer hover:border-github-purple/50 transition">
                         <input type="checkbox" id="req-files" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
                         <div class="text-sm">
-                            <p class="font-semibold text-slate-200">Archivos web generados</p>
-                            <p class="text-xs text-slate-500">La página HTML/CSS/JS generada por tu IA lista en tu ordenador.</p>
+                            <p class="font-semibold text-slate-200">Visitar Arena AI</p>
+                            <p class="text-xs text-slate-500">Usaremos el agente de <a href="https://arena.ai/agent" target="_blank" class="text-github-blue hover:underline font-semibold">Arena AI <i class="fa-solid fa-up-right-from-square text-[10px]"></i></a>.</p>
                         </div>
                     </label>
                     <label class="flex items-start space-x-3 p-3 bg-github-card rounded-lg border border-github-border cursor-pointer hover:border-github-purple/50 transition">
                         <input type="checkbox" id="req-index" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
                         <div class="text-sm">
                             <p class="font-semibold text-slate-200">Archivo "index.html"</p>
-                            <p class="text-xs text-slate-500">Tu archivo principal debe llamarse estrictamente así y en minúsculas.</p>
+                            <p class="text-xs text-slate-500">El archivo descargado de Arena debe llamarse así en minúsculas en la raíz.</p>
                         </div>
                     </label>
                 </div>
@@ -161,25 +167,33 @@
 
             <!-- Quick Navigation Menu -->
             <div class="bg-github-dark border border-github-border rounded-xl p-5 sticky top-24 hidden lg:block">
-                <h3 class="font-bold text-sm text-slate-400 uppercase tracking-wider mb-4">Pasos del proceso</h3>
+                <h3 class="font-bold text-sm text-slate-400 uppercase tracking-wider mb-4">Etapas del Proceso</h3>
                 <nav class="space-y-1">
-                    <a href="#step1" id="nav-step1" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
+                    <div class="text-[10px] font-bold text-github-purple tracking-widest uppercase px-2.5 py-1">Fase 1: Creación</div>
+                    <a href="#step0" id="nav-step0" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
                         <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">1</span>
+                        <span class="text-sm font-medium">Crear en Arena AI</span>
+                        <i id="check-nav-step0" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
+                    </a>
+                    
+                    <div class="text-[10px] font-bold text-github-blue tracking-widest uppercase px-2.5 py-2 mt-2 border-t border-github-border/50">Fase 2: Despliegue</div>
+                    <a href="#step1" id="nav-step1" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">2</span>
                         <span class="text-sm font-medium">Crear Repositorio</span>
                         <i id="check-nav-step1" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
                     </a>
                     <a href="#step2" id="nav-step2" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
-                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">2</span>
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">3</span>
                         <span class="text-sm font-medium">Subir Archivos</span>
                         <i id="check-nav-step2" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
                     </a>
                     <a href="#step3" id="nav-step3" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
-                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">3</span>
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">4</span>
                         <span class="text-sm font-medium">Activar Pages</span>
                         <i id="check-nav-step3" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
                     </a>
                     <a href="#step4" id="nav-step4" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
-                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">4</span>
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">5</span>
                         <span class="text-sm font-medium">¡Ver tu web!</span>
                         <i id="check-nav-step4" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
                     </a>
@@ -190,10 +204,10 @@
                         <i class="fa-solid fa-rotate text-github-blue"></i>
                         <span>¿Cómo actualizar en el futuro?</span>
                     </a>
-                    <a href="#git-advanced" class="flex items-center space-x-2 text-xs text-slate-400 hover:text-white transition">
-                        <i class="fa-solid fa-terminal text-github-purple"></i>
-                        <span>Alternativa avanzada con Git</span>
-                    </a>
+                    <button onclick="switchTab('prompts')" class="flex items-center space-x-2 text-xs text-slate-400 hover:text-white transition text-left w-full">
+                        <i class="fa-solid fa-wand-magic-sparkles text-github-purple"></i>
+                        <span>Ver ejemplos de Prompts</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -201,22 +215,99 @@
         <!-- Right Column: Interactive Step-by-Step Guide -->
         <div class="lg:col-span-8 space-y-12">
             
-            <!-- STEP 1: CREAR REPOSITORIO -->
-            <section id="step1" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-purple/30">
+            <!-- STEP 0: ARENA AI -->
+            <section id="step0" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-purple/30 glow-purple">
                 <div class="absolute -top-4 -left-4 w-10 h-10 bg-github-purple text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-github-purple/20">
                     1
                 </div>
                 
                 <div class="flex items-center justify-between mb-4 mt-2">
                     <h2 class="text-xl md:text-2xl font-bold text-white flex items-center space-x-3">
-                        <i class="fa-solid fa-folder-plus text-github-purple"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles text-github-purple"></i>
+                        <span>Crear tu Web en Arena AI</span>
+                    </h2>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Fase 1: Creación</span>
+                </div>
+                
+                <p class="text-slate-300 mb-4 text-sm md:text-base leading-relaxed">
+                    Usa el modo agente inteligente de Arena AI para diseñar y maquetar tu portal web sin escribir una sola línea de código, interactuando por chat.
+                </p>
+
+                <!-- Helpful Prompt Banner Callout -->
+                <div class="bg-github-purple/10 border border-github-purple/30 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-lightbulb text-github-purple text-2xl"></i>
+                        <p class="text-xs text-slate-300">
+                            <strong class="text-white block">¿No sabes qué pedirle?</strong>
+                            Tenemos plantillas de prompts de ejemplo listas para copiar y usar en Arena AI.
+                        </p>
+                    </div>
+                    <button onclick="switchTab('prompts')" class="bg-github-purple text-github-darker hover:bg-purple-300 transition px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap">
+                        Ver Prompts <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Interactive Step checklist -->
+                <div class="bg-github-card rounded-xl p-4 border border-github-border space-y-3.5 mb-6">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Pasos interactivos en Arena:</h4>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s0-c1" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Entra en <a href="https://arena.ai/agent" target="_blank" class="text-github-blue hover:underline inline-flex items-center space-x-1 font-semibold"><span>Arena AI (Agent Mode)</span> <i class="fa-solid fa-up-right-from-square text-xs"></i></a>.
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s0-c2" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Escribe tu prompt en el chat detallando cómo quieres la web (ej. <code class="bg-github-darker text-github-purple px-1.5 py-0.5 rounded font-mono text-xs">"Haz un portafolio oscuro para programadores usando Tailwind..."</code>). 
+                            <strong class="text-amber-400 block mt-1"><i class="fa-solid fa-triangle-exclamation"></i> Regla de oro de compatibilidad:</strong> 
+                            Añade siempre al final de tu prompt: <em class="text-slate-400 italic">"Esta web se publicará en GitHub Pages, por lo que debe ser 100% estática (usa solo HTML, CSS y JS, sin PHP, bases de datos ni código de servidor)".</em>
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s0-c3" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Interactúa con el agente pidiéndole retoques ("haz este botón más grande", "cambia esta imagen", "añade un formulario").
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s0-c4" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Descarga el proyecto generado a tu ordenador y comprueba que el archivo principal se llame exactamente <code class="bg-github-darker text-github-purple px-1.5 py-0.5 rounded font-mono text-xs">index.html</code>.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Step Navigation Action -->
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-github-purple font-mono"><i class="fa-solid fa-check-circle"></i> ¡Arena se encargará de todas las rutas del código por ti!</span>
+                    <a href="#step1" class="bg-github-card hover:bg-github-border border border-github-border px-4 py-2 rounded-lg text-sm font-semibold text-slate-200 transition flex items-center space-x-2">
+                        <span>Paso Siguiente</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- STEP 1: CREAR REPOSITORIO -->
+            <section id="step1" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-blue/30">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-github-blue text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-github-blue/20">
+                    2
+                </div>
+                
+                <div class="flex items-center justify-between mb-4 mt-2">
+                    <h2 class="text-xl md:text-2xl font-bold text-white flex items-center space-x-3">
+                        <i class="fa-solid fa-folder-plus text-github-blue"></i>
                         <span>Crear un Nuevo Repositorio</span>
                     </h2>
-                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 1 de 4</span>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Fase 2: Paso 1 de 4</span>
                 </div>
                 
                 <p class="text-slate-300 mb-6 text-sm md:text-base">
-                    Un repositorio es como la carpeta inteligente donde GitHub guardará tu proyecto en la nube para poder servirlo en Internet.
+                    Un repositorio es como la carpeta inteligente donde GitHub guardará tu proyecto de Arena AI para poder servirlo en Internet.
                 </p>
 
                 <!-- Interactive Step checklist -->
@@ -224,35 +315,35 @@
                     <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Instrucciones interactivas:</h4>
                     
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" id="s1-c1" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <input type="checkbox" id="s1-c1" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
                         <span class="text-sm text-slate-300">
                             Entra en <a href="https://github.com" target="_blank" class="text-github-blue hover:underline inline-flex items-center space-x-1"><span>GitHub.com</span> <i class="fa-solid fa-up-right-from-square text-xs"></i></a> e inicia sesión.
                         </span>
                     </label>
                     
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" id="s1-c2" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <input type="checkbox" id="s1-c2" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
                         <span class="text-sm text-slate-300">
-                            En la barra lateral izquierda (arriba de tu lista de repositorios recientes), haz clic en el botón verde <strong class="text-white bg-github-accent px-2 py-0.5 rounded text-xs"><i class="fa-solid fa-plus mr-1"></i> New</strong>. (Alternativamente, puedes usar el icono <strong class="text-white bg-github-border px-1.5 py-0.5 rounded text-xs"><i class="fa-solid fa-plus"></i></strong> en la esquina superior derecha).
+                            En la barra lateral izquierda (arriba de tu lista de repositorios recientes), haz clic en el botón verde <strong class="text-white bg-github-accent px-2 py-0.5 rounded text-xs"><i class="fa-solid fa-plus mr-1"></i> New</strong>. (Si no lo ves, puedes usar el menú desplegable "+" que se encuentra en la parte superior derecha de la pantalla y seleccionar "New repository").
                         </span>
                     </label>
 
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" id="s1-c3" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <input type="checkbox" id="s1-c3" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
                         <span class="text-sm text-slate-300">
-                            Escribe un nombre de repositorio (ej. <code class="bg-github-darker text-github-purple px-1.5 py-0.5 rounded font-mono text-xs">mi-proyecto-web</code>). Evita tildes, mayúsculas y espacios.
+                            Escribe un nombre de repositorio (ej. <code class="bg-github-darker text-github-blue px-1.5 py-0.5 rounded font-mono text-xs">mi-proyecto-arena</code>). Evita tildes, mayúsculas y espacios.
                         </span>
                     </label>
 
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" id="s1-c4" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <input type="checkbox" id="s1-c4" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
                         <span class="text-sm text-slate-300">
                             Selecciona obligatoriamente la opción <strong class="text-emerald-400"><i class="fa-solid fa-lock-open mr-1 text-xs"></i> Public</strong> (Público) para que Pages funcione de forma gratuita.
                         </span>
                     </label>
 
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" id="s1-c5" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <input type="checkbox" id="s1-c5" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
                         <span class="text-sm text-slate-300">
                             Deja el resto de opciones desmarcadas (sin añadir README ni .gitignore) y haz clic en el gran botón verde <strong class="text-white bg-github-accent px-2 py-0.5 rounded text-xs">Create repository</strong>.
                         </span>
@@ -272,7 +363,7 @@
             <!-- STEP 2: SUBIR ARCHIVOS -->
             <section id="step2" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-blue/30">
                 <div class="absolute -top-4 -left-4 w-10 h-10 bg-github-blue text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-github-blue/20">
-                    2
+                    3
                 </div>
                 
                 <div class="flex items-center justify-between mb-4 mt-2">
@@ -280,11 +371,11 @@
                         <i class="fa-solid fa-cloud-arrow-up text-github-blue"></i>
                         <span>Subir los Archivos de tu Web</span>
                     </h2>
-                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 2 de 4</span>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Fase 2: Paso 2 de 4</span>
                 </div>
                 
                 <p class="text-slate-300 mb-6 text-sm md:text-base">
-                    Es el momento de arrastrar los documentos y recursos que tu IA ha estructurado para tu página directamente a la nube.
+                    Es el momento de arrastrar los documentos y recursos que tu IA Arena ha estructurado para tu página directamente a la nube.
                 </p>
 
                 <!-- Interactive Step checklist -->
@@ -301,7 +392,7 @@
                     <label class="flex items-start space-x-3 cursor-pointer">
                         <input type="checkbox" id="s2-c2" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
                         <span class="text-sm text-slate-300">
-                            Abre el explorador de archivos de tu ordenador donde tienes guardada tu página.
+                            Abre el explorador de archivos de tu ordenador donde tienes guardada la página de Arena AI.
                         </span>
                     </label>
 
@@ -322,7 +413,7 @@
                     <label class="flex items-start space-x-3 cursor-pointer">
                         <input type="checkbox" id="s2-c5" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
                         <span class="text-sm text-slate-300">
-                            Baja al bloque <strong>Commit changes</strong>, escribe una descripción como <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Mi primer despliegue"</code> y presiona el botón verde de guardar cambios.
+                            Baja al bloque <strong>Commit changes</strong>, escribe una descripción como <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Web inicial con Arena AI"</code> y presiona el botón verde de guardar cambios.
                         </span>
                     </label>
                 </div>
@@ -340,7 +431,7 @@
             <!-- STEP 3: ACTIVAR PAGES -->
             <section id="step3" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-purple/30">
                 <div class="absolute -top-4 -left-4 w-10 h-10 bg-github-purple text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-github-purple/20">
-                    3
+                    4
                 </div>
                 
                 <div class="flex items-center justify-between mb-4 mt-2">
@@ -348,7 +439,7 @@
                         <i class="fa-solid fa-gears text-github-purple"></i>
                         <span>Activar GitHub Pages</span>
                     </h2>
-                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 3 de 4</span>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Fase 2: Paso 3 de 4</span>
                 </div>
                 
                 <p class="text-slate-300 mb-6 text-sm md:text-base">
@@ -408,7 +499,7 @@
             <!-- STEP 4: ¡VER TU WEB! -->
             <section id="step4" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-emerald-500/30">
                 <div class="absolute -top-4 -left-4 w-10 h-10 bg-emerald-500 text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-emerald-500/20">
-                    4
+                    5
                 </div>
                 
                 <div class="flex items-center justify-between mb-4 mt-2">
@@ -416,7 +507,7 @@
                         <i class="fa-solid fa-globe text-emerald-400"></i>
                         <span>¡Ver tu Página Web en Vivo!</span>
                     </h2>
-                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 4 de 4</span>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Fase 2: Paso 4 de 4</span>
                 </div>
                 
                 <p class="text-slate-300 mb-6 text-sm md:text-base">
@@ -461,7 +552,7 @@
                     <div class="text-4xl">🎉</div>
                     <div class="text-center md:text-left flex-grow">
                         <h4 class="font-bold text-white text-base">¡Enhorabuena, completaste todo el tutorial!</h4>
-                        <p class="text-xs text-slate-400">Ahora puedes compartir la URL de tu web con tus amigos, familiares, o ponerla en tu CV.</p>
+                        <p class="text-xs text-slate-400">Has creado tu web con Arena AI y la has publicado de forma gratuita en GitHub Pages.</p>
                     </div>
                     <button onclick="celebrateClick()" class="bg-emerald-500 hover:bg-emerald-600 text-github-darker font-bold px-4 py-2 rounded-lg text-xs transition whitespace-nowrap">
                         <i class="fa-solid fa-sparkles mr-1"></i>¡Celebrar!
@@ -482,10 +573,10 @@
             <section id="updates" class="bg-github-dark border border-github-border rounded-xl p-6 transition duration-300 hover:border-github-blue/30">
                 <h3 class="text-xl font-bold text-white mb-4 flex items-center space-x-3">
                     <i class="fa-solid fa-rotate text-github-blue"></i>
-                    <span>¿Cómo actualizar y subir cambios a tu web?</span>
+                    <span>¿Cómo actualizar y subir cambios de Arena AI a tu web?</span>
                 </h3>
                 <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
-                    Si modificas tu código o la Inteligencia Artificial genera una nueva versión mejorada, no necesitas crear otro repositorio. Puedes actualizar el diseño actual <strong>sobrescribiendo</strong> los archivos existentes de manera muy fácil:
+                    Si le pides mejoras a la IA de Arena y descargas una nueva versión de tu página, no necesitas crear otro repositorio. Puedes actualizar el diseño actual <strong>sobrescribiendo</strong> los archivos existentes de manera muy fácil:
                 </p>
                 <div class="space-y-4">
                     <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
@@ -513,7 +604,7 @@
                         <div class="bg-github-blue/10 text-github-blue font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">04</div>
                         <div>
                             <h4 class="text-sm font-semibold text-white mb-1">Confirma los cambios (Commit)</h4>
-                            <p class="text-xs text-slate-400">Baja hasta la sección <strong>Commit changes</strong>, escribe una breve descripción de tus cambios (ej. <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Actualización de diseño"</code>) y haz clic en el botón verde. En 1-2 minutos la web se actualizará sola.</p>
+                            <p class="text-xs text-slate-400">Baja hasta la sección <strong>Commit changes</strong>, escribe una breve descripción de tus cambios (ej. <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Actualización de diseño con Arena"</code>) y haz clic en el botón verde. En 1-2 minutos la web se actualizará sola.</p>
                         </div>
                     </div>
                 </div>
@@ -544,7 +635,7 @@
                         </div>
                         <pre class="bg-github-card p-4 rounded-lg border border-github-border text-xs md:text-sm text-github-blue font-mono overflow-x-auto"><code id="git-init-code">git init
 git add .
-git commit -m "Mi primer commit"
+git commit -m "Mi primer commit de Arena"
 git branch -M main
 git remote add origin https://github.com/TU-USUARIO/TU-REPOSITORIO.git
 git push -u origin main</code></pre>
@@ -559,14 +650,126 @@ git push -u origin main</code></pre>
                             </button>
                         </div>
                         <pre class="bg-github-card p-4 rounded-lg border border-github-border text-xs md:text-sm text-github-blue font-mono overflow-x-auto"><code id="git-update-code">git add .
-git commit -m "Actualizando contenido de la web"
+git commit -m "Actualizando contenido de Arena AI"
 git push origin main</code></pre>
                     </div>
                 </div>
             </section>
 
         </div>
-    </main>
+    </div>
+
+
+    <!-- VIEW 2: ARENA AI PROMPTS GALLERY (HIDDEN BY DEFAULT) -->
+    <div id="view-prompts" class="max-w-6xl mx-auto px-4 py-12 flex-grow hidden">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-white mb-2 flex items-center justify-center space-x-3">
+                <i class="fa-solid fa-wand-magic-sparkles text-github-purple"></i>
+                <span>Ejemplos de Prompts para Arena AI</span>
+            </h2>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto">
+                Copia y pega cualquiera de estas plantillas redactadas en el chat del Agente de Arena para obtener una web 100% compatible con GitHub Pages en segundos.
+            </p>
+        </div>
+
+        <!-- Prompts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- PROMPT 1: PORTFOLIO CYBERPUNK -->
+            <div class="bg-github-dark border border-github-border rounded-xl p-6 hover:border-github-purple/30 transition flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-user text-github-purple"></i>
+                            <span>Portafolio Personal Cyberpunk</span>
+                        </h3>
+                        <span class="text-[10px] bg-github-purple/10 text-github-purple border border-github-purple/20 px-2 py-0.5 rounded font-mono">Desarrolladores</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Un portafolio moderno en modo oscuro para programadores con efectos dinámicos, sección de proyectos, habilidades y contacto.
+                    </p>
+                    <div class="relative bg-github-darker border border-github-border rounded-lg p-3 text-xs font-mono text-slate-300 max-h-48 overflow-y-auto scroll-smooth">
+                        <code id="prompt-p1">Crea un portafolio web personal estilo cyberpunk usando tonos oscuros (negro carbón, gris oscuro) con acentos de neón verde y morado. Debe estar optimizado para GitHub Pages, por lo que será 100% estático (usa solo HTML5, CSS con Tailwind mediante CDN y JavaScript plano, sin PHP ni bases de datos). Estructura la web con: 1) Cabecera fija con logo animado y menú de navegación, 2) Hero Section con un título impactante que se escriba con efecto de máquina de escribir ('Hola, soy Desarrollador Full-stack'), una breve bio y botones con efectos glow, 3) Sección de proyectos con 3 tarjetas visuales modernas que tengan efecto hover de zoom, 4) Sección de habilidades con barras de progreso animadas, y 5) Un formulario de contacto visualmente atractivo (los campos de texto con bordes de neón) y un botón de enviar.</code>
+                    </div>
+                </div>
+                <button onclick="copyToClipboard('prompt-p1', this)" class="mt-4 bg-github-card border border-github-border hover:border-github-purple/50 py-2.5 rounded-lg text-xs font-semibold text-slate-200 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copiar Prompt</span>
+                </button>
+            </div>
+
+            <!-- PROMPT 2: LANDING PAGE SAAS -->
+            <div class="bg-github-dark border border-github-border rounded-xl p-6 hover:border-github-blue/30 transition flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-cloud text-github-blue"></i>
+                            <span>Landing Page de App / SaaS</span>
+                        </h3>
+                        <span class="text-[10px] bg-github-blue/10 text-github-blue border border-github-blue/20 px-2 py-0.5 rounded font-mono">Mercadotecnia</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Página de destino limpia y persuasiva para promocionar una aplicación, con lista de características, precios, testimonios y llamadas a la acción.
+                    </p>
+                    <div class="relative bg-github-darker border border-github-border rounded-lg p-3 text-xs font-mono text-slate-300 max-h-48 overflow-y-auto scroll-smooth">
+                        <code id="prompt-p2">Diseña una página de aterrizaje (Landing Page) moderna y ultra-limpia para promocionar una aplicación de productividad llamada 'FocusFlow'. La web debe ser puramente estática, 100% compatible con GitHub Pages (sin bases de datos ni backend, usa solo HTML, CSS con Tailwind y JavaScript). Incluye: 1) Barra de navegación minimalista con logo, enlaces y botón de 'Descargar ahora' con bordes redondeados, 2) Hero section con fondo degradado suave, un titular persuasivo, un botón de llamada a la acción (CTA) destacado que brille levemente y un marcador de posición que simule una captura de pantalla de la app, 3) Cuadrícula de 4 características clave con iconos de Font Awesome, 4) Sección de testimonios de clientes con avatares redondos, y 5) Un pie de página completo.</code>
+                    </div>
+                </div>
+                <button onclick="copyToClipboard('prompt-p2', this)" class="mt-4 bg-github-card border border-github-border hover:border-github-blue/50 py-2.5 rounded-lg text-xs font-semibold text-slate-200 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copiar Prompt</span>
+                </button>
+            </div>
+
+            <!-- PROMPT 3: BIO LINKS -->
+            <div class="bg-github-dark border border-github-border rounded-xl p-6 hover:border-emerald-500/30 transition flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-link text-emerald-400"></i>
+                            <span>Enlaces de Biografía (Linktree)</span>
+                        </h3>
+                        <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono">Redes Sociales</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Clon de Linktree minimalista y animado para creadores, perfecto para consolidar todos tus perfiles sociales y proyectos en un solo enlace.
+                    </p>
+                    <div class="relative bg-github-darker border border-github-border rounded-lg p-3 text-xs font-mono text-slate-300 max-h-48 overflow-y-auto scroll-smooth">
+                        <code id="prompt-p3">Crea una página de enlaces personales (tipo Link-in-Bio o Linktree) súper atractiva y animada para un creador de contenido digital. La página debe ser totalmente estática y compatible con GitHub Pages (HTML, Tailwind CSS, JS, sin backend). Componentes requeridos: 1) Foto de perfil redonda en el centro superior con un borde animado de gradiente, 2) Nombre de usuario en negrita y una frase de biografía corta debajo, 3) Un listado de 5 botones de enlaces grandes con esquinas muy redondeadas, cada uno con un icono de Font Awesome a la izquierda (YouTube, Instagram, Twitch, Portfolio, Contacto) y efectos de animación al pasar el cursor (hover), 4) Un pie de página con iconos sociales minimalistas.</code>
+                    </div>
+                </div>
+                <button onclick="copyToClipboard('prompt-p3', this)" class="mt-4 bg-github-card border border-github-border hover:border-emerald-500/50 py-2.5 rounded-lg text-xs font-semibold text-slate-200 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copiar Prompt</span>
+                </button>
+            </div>
+
+            <!-- PROMPT 4: RESTAURANT / COFFEE SHOP -->
+            <div class="bg-github-dark border border-github-border rounded-xl p-6 hover:border-amber-500/30 transition flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-mug-hot text-amber-500"></i>
+                            <span>Web de Cafetería / Restaurante</span>
+                        </h3>
+                        <span class="text-[10px] bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2 py-0.5 rounded font-mono">Negocio Local</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Portal elegante para un negocio local con un menú interactivo por categorías con JS plano, sección sobre nosotros y formulario de reservas.
+                    </p>
+                    <div class="relative bg-github-darker border border-github-border rounded-lg p-3 text-xs font-mono text-slate-300 max-h-48 overflow-y-auto scroll-smooth">
+                        <code id="prompt-p4">Crea una página de inicio elegante y acogedora para una cafetería gourmet llamada 'Aroma & Co'. Todo el código debe ser estático para subirse directamente a GitHub Pages (HTML, Tailwind CSS, JS plano). Requisitos de diseño: 1) Cabecera con navegación, 2) Hero section con un fondo que evoque calidez, un gran titular y botones para ver el menú o reservar, 3) Una sección interactiva de menú con pestañas para alternar entre 'Cafés', 'Repostería' y 'Desayunos' usando JavaScript sencillo para mostrar/ocultar los platos, 4) Sección de 'Sobre nosotros' con diseño a dos columnas, y 5) Formulario de reservas estético y datos de contacto/horarios.</code>
+                    </div>
+                </div>
+                <button onclick="copyToClipboard('prompt-p4', this)" class="mt-4 bg-github-card border border-github-border hover:border-amber-500/50 py-2.5 rounded-lg text-xs font-semibold text-slate-200 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copiar Prompt</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
 
     <!-- Custom Floating Alert Box for Copy actions -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 bg-github-card border border-github-border p-4 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
@@ -584,14 +787,16 @@ git push origin main</code></pre>
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div class="flex items-center space-x-2">
                 <i class="fa-brands fa-github text-lg text-slate-400"></i>
-                <span>Tutorial Interactivo diseñado para publicar páginas web de la IA. Creado por <a href="https://arrobapi.com" target="_blank" class="text-github-purple hover:underline font-semibold ml-1">Academia arrobaPi</a>.</span>
+                <span>Tutorial Interactivo diseñado para publicar páginas de Arena AI. Creado por <a href="https://arrobapi.com" target="_blank" class="text-github-purple hover:underline font-semibold ml-1">Academia arrobaPi</a>.</span>
             </div>
             <div class="flex space-x-4">
+                <a href="https://arena.ai/agent" target="_blank" class="hover:text-slate-300 transition text-github-purple font-semibold"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i>Arena AI</a>
+                <span class="text-slate-700">•</span>
                 <a href="https://github.com" target="_blank" class="hover:text-slate-300 transition">GitHub</a>
                 <span class="text-slate-700">•</span>
                 <a href="https://pages.github.com" target="_blank" class="hover:text-slate-300 transition">GitHub Pages</a>
                 <span class="text-slate-700">•</span>
-                <a href="#" class="hover:text-slate-300 transition" onclick="resetAllProgress()">Reiniciar Guía</a>
+                <button class="hover:text-slate-300 transition" onclick="resetAllProgress()">Reiniciar Guía</button>
             </div>
         </div>
     </footer>
@@ -601,6 +806,7 @@ git push origin main</code></pre>
         // Total interactive checklist inputs
         const totalItems = [
             'req-account', 'req-files', 'req-index',
+            's0-c1', 's0-c2', 's0-c3', 's0-c4', // Arena steps
             's1-c1', 's1-c2', 's1-c3', 's1-c4', 's1-c5',
             's2-c1', 's2-c2', 's2-c3', 's2-c4', 's2-c5',
             's3-c1', 's3-c2', 's3-c3', 's3-c4', 's3-c5',
@@ -618,6 +824,38 @@ git push origin main</code></pre>
             });
             updateProgress();
         });
+
+        // Switch between Interactive Guide and Prompts Gallery tabs
+        function switchTab(tabId) {
+            const btnGuide = document.getElementById('tab-guide');
+            const btnPrompts = document.getElementById('tab-prompts');
+            const viewGuide = document.getElementById('view-guide');
+            const viewPrompts = document.getElementById('view-prompts');
+            const progressContainer = document.getElementById('progress-container');
+
+            if (tabId === 'guide') {
+                // Active Guide style
+                btnGuide.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-200 bg-github-purple text-github-darker";
+                btnPrompts.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-200";
+                
+                viewGuide.classList.remove('hidden');
+                viewPrompts.classList.add('hidden');
+                if (progressContainer) progressContainer.classList.remove('opacity-0');
+                
+                // Scroll smoothly to start
+                document.getElementById('tutorial-start').scrollIntoView({ behavior: 'smooth' });
+            } else if (tabId === 'prompts') {
+                // Active Prompts style
+                btnPrompts.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-200 bg-github-purple text-github-darker";
+                btnGuide.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-200";
+                
+                viewPrompts.classList.remove('hidden');
+                viewGuide.classList.add('hidden');
+                if (progressContainer) progressContainer.classList.add('opacity-0');
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
 
         // Function to update progress state
         function updateProgress() {
@@ -644,6 +882,7 @@ git push origin main</code></pre>
             }
 
             // Update step check navigation highlights
+            checkStepCompletion('step0', ['s0-c1', 's0-c2', 's0-c3', 's0-c4']);
             checkStepCompletion('step1', ['s1-c1', 's1-c2', 's1-c3', 's1-c4', 's1-c5']);
             checkStepCompletion('step2', ['s2-c1', 's2-c2', 's2-c3', 's2-c4', 's2-c5']);
             checkStepCompletion('step3', ['s3-c1', 's3-c2', 's3-c3', 's3-c4', 's3-c5']);
@@ -693,6 +932,7 @@ git push origin main</code></pre>
                 localStorage.setItem(id, 'false');
             });
             updateProgress();
+            switchTab('guide');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             showToast('Progreso reiniciado', 'Vuelve a empezar cuando quieras.');
         }
@@ -715,7 +955,7 @@ git push origin main</code></pre>
             try {
                 const successful = document.execCommand('copy');
                 if (successful) {
-                    showToast('¡Copiado al portapapeles!', 'Ya puedes pegarlo en tu consola.');
+                    showToast('¡Copiado al portapapeles!', 'Listo para usar.');
                     // Temporarily change button icon/text
                     const originalHTML = button.innerHTML;
                     button.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> <span class="text-emerald-400 font-bold">¡Copiado!</span>';
@@ -735,8 +975,10 @@ git push origin main</code></pre>
         function showToast(title, body) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
+            const toastSubtitle = toast.querySelector('p:last-child');
             if (toast && toastMessage) {
                 toastMessage.innerText = title;
+                if (toastSubtitle) toastSubtitle.innerText = body;
                 toast.classList.remove('translate-y-24', 'opacity-0');
                 toast.classList.add('translate-y-0', 'opacity-100');
                 

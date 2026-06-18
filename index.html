@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva: Publicar en GitHub Pages</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        github: {
+                            darker: '#010409',
+                            dark: '#0d1117',
+                            card: '#161b22',
+                            border: '#30363d',
+                            accent: '#238636',
+                            accentHover: '#2ea043',
+                            purple: '#bc8cff',
+                            blue: '#58a6ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #010409;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b949e;
+        }
+        
+        /* Smooth glowing effects */
+        .glow-purple {
+            box-shadow: 0 0 25px -5px rgba(188, 140, 255, 0.15);
+        }
+        .glow-green {
+            box-shadow: 0 0 25px -5px rgba(46, 160, 67, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-github-darker text-slate-100 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Header Navbar -->
+    <header class="sticky top-0 z-50 bg-github-dark/80 backdrop-blur-md border-b border-github-border px-4 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fa-brands fa-github text-3xl text-white"></i>
+                <span class="font-bold text-lg tracking-tight hidden sm:inline-block">
+                    Git<span class="text-github-purple">Pages</span> <span class="text-xs font-mono font-normal bg-github-border px-2 py-0.5 rounded ml-2">v1.0</span>
+                </span>
+            </div>
+            
+            <!-- Overall Progress Bar in Header -->
+            <div class="flex items-center space-x-3 w-1/3 sm:w-1/2 max-w-xs">
+                <div class="w-full bg-github-border h-2 rounded-full overflow-hidden">
+                    <div id="header-progress" class="bg-gradient-to-r from-github-purple to-github-blue h-full w-0 transition-all duration-500"></div>
+                </div>
+                <span id="progress-percent" class="text-xs font-mono font-bold text-github-blue">0%</span>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <a href="#tutorial-start" class="bg-github-card border border-github-border text-xs px-3 py-1.5 rounded-lg hover:bg-github-border transition flex items-center space-x-2">
+                    <i class="fa-solid fa-play text-github-purple"></i>
+                    <span class="hidden md:inline">Comenzar</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-16 px-4 border-b border-github-border bg-gradient-to-b from-github-dark to-github-darker">
+        <!-- Background Grid decoration -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#30363d_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center space-x-2 bg-github-card border border-github-border px-3 py-1.5 rounded-full text-xs text-github-purple mb-6 glow-purple">
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <span>Guía ultra rápida para la IA Arena y creadores</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                Publica tu web en <br>
+                <span class="bg-gradient-to-r from-github-purple via-github-blue to-emerald-400 bg-clip-text text-transparent">GitHub Pages</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
+                Sube tu web estática (HTML, CSS, JS) en minutos de forma gratuita. Diseñado especialmente para desplegar rápidamente páginas generadas por IA.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#tutorial-start" class="bg-github-accent hover:bg-github-accentHover text-white px-6 py-3 rounded-lg font-semibold transition flex items-center space-x-2 glow-green">
+                    <span>Empezar Tutorial</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <button onclick="resetAllProgress()" class="bg-github-card border border-github-border hover:border-red-500/50 text-slate-400 hover:text-red-400 px-4 py-3 rounded-lg text-sm transition flex items-center space-x-2">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>Reiniciar progreso</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main id="tutorial-start" class="max-w-6xl mx-auto px-4 py-12 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Column: Navigation & Prerequisites Checklist -->
+        <div class="lg:col-span-4 space-y-6">
+            <!-- Prerequisites Card -->
+            <div class="bg-github-dark border border-github-border rounded-xl p-5 glow-purple">
+                <h3 class="font-bold text-lg text-white mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-clipboard-list text-github-purple"></i>
+                    <span>Requisitos Previos</span>
+                </h3>
+                <div class="space-y-3">
+                    <label class="flex items-start space-x-3 p-3 bg-github-card rounded-lg border border-github-border cursor-pointer hover:border-github-purple/50 transition">
+                        <input type="checkbox" id="req-account" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <div class="text-sm">
+                            <p class="font-semibold text-slate-200">Cuenta de GitHub activa</p>
+                            <p class="text-xs text-slate-500">¿No tienes? <a href="https://github.com/join" target="_blank" class="text-github-blue hover:underline">Regístrate gratis</a></p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3 p-3 bg-github-card rounded-lg border border-github-border cursor-pointer hover:border-github-purple/50 transition">
+                        <input type="checkbox" id="req-files" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <div class="text-sm">
+                            <p class="font-semibold text-slate-200">Archivos web generados</p>
+                            <p class="text-xs text-slate-500">La página HTML/CSS/JS generada por tu IA lista en tu ordenador.</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3 p-3 bg-github-card rounded-lg border border-github-border cursor-pointer hover:border-github-purple/50 transition">
+                        <input type="checkbox" id="req-index" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <div class="text-sm">
+                            <p class="font-semibold text-slate-200">Archivo "index.html"</p>
+                            <p class="text-xs text-slate-500">Tu archivo principal debe llamarse estrictamente así y en minúsculas.</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Quick Navigation Menu -->
+            <div class="bg-github-dark border border-github-border rounded-xl p-5 sticky top-24 hidden lg:block">
+                <h3 class="font-bold text-sm text-slate-400 uppercase tracking-wider mb-4">Pasos del proceso</h3>
+                <nav class="space-y-1">
+                    <a href="#step1" id="nav-step1" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">1</span>
+                        <span class="text-sm font-medium">Crear Repositorio</span>
+                        <i id="check-nav-step1" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
+                    </a>
+                    <a href="#step2" id="nav-step2" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">2</span>
+                        <span class="text-sm font-medium">Subir Archivos</span>
+                        <i id="check-nav-step2" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
+                    </a>
+                    <a href="#step3" id="nav-step3" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">3</span>
+                        <span class="text-sm font-medium">Activar Pages</span>
+                        <i id="check-nav-step3" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
+                    </a>
+                    <a href="#step4" id="nav-step4" class="flex items-center space-x-3 p-2.5 rounded-lg text-slate-400 hover:bg-github-card hover:text-white transition">
+                        <span class="w-6 h-6 rounded-full bg-github-border flex items-center justify-center text-xs font-bold font-mono">4</span>
+                        <span class="text-sm font-medium">¡Ver tu web!</span>
+                        <i id="check-nav-step4" class="fa-solid fa-circle-check text-github-accent ml-auto hidden"></i>
+                    </a>
+                </nav>
+
+                <div class="mt-6 pt-6 border-t border-github-border space-y-2">
+                    <a href="#updates" class="flex items-center space-x-2 text-xs text-slate-400 hover:text-white transition">
+                        <i class="fa-solid fa-rotate text-github-blue"></i>
+                        <span>¿Cómo actualizar en el futuro?</span>
+                    </a>
+                    <a href="#git-advanced" class="flex items-center space-x-2 text-xs text-slate-400 hover:text-white transition">
+                        <i class="fa-solid fa-terminal text-github-purple"></i>
+                        <span>Alternativa avanzada con Git</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Interactive Step-by-Step Guide -->
+        <div class="lg:col-span-8 space-y-12">
+            
+            <!-- STEP 1: CREAR REPOSITORIO -->
+            <section id="step1" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-purple/30">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-github-purple text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-github-purple/20">
+                    1
+                </div>
+                
+                <div class="flex items-center justify-between mb-4 mt-2">
+                    <h2 class="text-xl md:text-2xl font-bold text-white flex items-center space-x-3">
+                        <i class="fa-solid fa-folder-plus text-github-purple"></i>
+                        <span>Crear un Nuevo Repositorio</span>
+                    </h2>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 1 de 4</span>
+                </div>
+                
+                <p class="text-slate-300 mb-6 text-sm md:text-base">
+                    Un repositorio es como la carpeta inteligente donde GitHub guardará tu proyecto en la nube para poder servirlo en Internet.
+                </p>
+
+                <!-- Interactive Step checklist -->
+                <div class="bg-github-card rounded-xl p-4 border border-github-border space-y-3.5 mb-6">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Instrucciones interactivas:</h4>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s1-c1" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Entra en <a href="https://github.com" target="_blank" class="text-github-blue hover:underline inline-flex items-center space-x-1"><span>GitHub.com</span> <i class="fa-solid fa-up-right-from-square text-xs"></i></a> e inicia sesión.
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s1-c2" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Haz clic en el botón <strong class="text-white bg-github-border px-1.5 py-0.5 rounded text-xs"><i class="fa-solid fa-plus mr-1"></i> New</strong> (o "New Repository") en la barra de navegación superior o lateral.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s1-c3" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Escribe un nombre de repositorio (ej. <code class="bg-github-darker text-github-purple px-1.5 py-0.5 rounded font-mono text-xs">mi-proyecto-web</code>). Evita tildes, mayúsculas y espacios.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s1-c4" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Selecciona obligatoriamente la opción <strong class="text-emerald-400"><i class="fa-solid fa-lock-open mr-1 text-xs"></i> Public</strong> (Público) para que Pages funcione de forma gratuita.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s1-c5" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Deja el resto de opciones desmarcadas (sin añadir README ni .gitignore) y haz clic en el gran botón verde <strong class="text-white bg-github-accent px-2 py-0.5 rounded text-xs">Create repository</strong>.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Step Navigation Action -->
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-mono"><i class="fa-solid fa-circle-info"></i> Elige un nombre descriptivo para tu URL final.</span>
+                    <a href="#step2" class="bg-github-card hover:bg-github-border border border-github-border px-4 py-2 rounded-lg text-sm font-semibold text-slate-200 transition flex items-center space-x-2">
+                        <span>Paso Siguiente</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- STEP 2: SUBIR ARCHIVOS -->
+            <section id="step2" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-blue/30">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-github-blue text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-github-blue/20">
+                    2
+                </div>
+                
+                <div class="flex items-center justify-between mb-4 mt-2">
+                    <h2 class="text-xl md:text-2xl font-bold text-white flex items-center space-x-3">
+                        <i class="fa-solid fa-cloud-arrow-up text-github-blue"></i>
+                        <span>Subir los Archivos de tu Web</span>
+                    </h2>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 2 de 4</span>
+                </div>
+                
+                <p class="text-slate-300 mb-6 text-sm md:text-base">
+                    Es el momento de arrastrar los documentos y recursos que tu IA ha estructurado para tu página directamente a la nube.
+                </p>
+
+                <!-- Interactive Step checklist -->
+                <div class="bg-github-card rounded-xl p-4 border border-github-border space-y-3.5 mb-6">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Instrucciones interactivas:</h4>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s2-c1" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            En la pantalla de configuración del nuevo repositorio, localiza y haz clic en el enlace <strong class="text-github-blue underline">uploading an existing file</strong> (subir un archivo existente).
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s2-c2" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Abre el explorador de archivos de tu ordenador donde tienes guardada tu página.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s2-c3" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Selecciona <strong>todos tus archivos</strong> (<code class="bg-github-darker text-github-blue px-1 py-0.5 rounded font-mono text-xs">index.html</code>, archivos CSS, imágenes, etc.) y arrástralos al cuadro gris de la página de GitHub.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s2-c4" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Espera a que la barra de carga finalice para cada archivo.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s2-c5" class="mt-1 rounded bg-github-darker border-github-border text-github-blue focus:ring-github-blue h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Baja al bloque <strong>Commit changes</strong>, escribe una descripción como <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Mi primer despliegue"</code> y presiona el botón verde de guardar cambios.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Step Navigation Action -->
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-amber-400 font-mono"><i class="fa-solid fa-triangle-exclamation"></i> Sube el contenido de la carpeta, no la carpeta entera.</span>
+                    <a href="#step3" class="bg-github-card hover:bg-github-border border border-github-border px-4 py-2 rounded-lg text-sm font-semibold text-slate-200 transition flex items-center space-x-2">
+                        <span>Paso Siguiente</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- STEP 3: ACTIVAR PAGES -->
+            <section id="step3" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-github-purple/30">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-github-purple text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-github-purple/20">
+                    3
+                </div>
+                
+                <div class="flex items-center justify-between mb-4 mt-2">
+                    <h2 class="text-xl md:text-2xl font-bold text-white flex items-center space-x-3">
+                        <i class="fa-solid fa-gears text-github-purple"></i>
+                        <span>Activar GitHub Pages</span>
+                    </h2>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 3 de 4</span>
+                </div>
+                
+                <p class="text-slate-300 mb-6 text-sm md:text-base">
+                    Es el momento de decirle a GitHub que interprete tu repositorio público como un portal de Internet accesible para todo el mundo.
+                </p>
+
+                <!-- Interactive Step checklist -->
+                <div class="bg-github-card rounded-xl p-4 border border-github-border space-y-3.5 mb-6">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Instrucciones interactivas:</h4>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s3-c1" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            En la parte superior de tu repositorio, haz clic en la pestaña de <strong class="text-white"><i class="fa-solid fa-gear mr-1 text-xs text-slate-400"></i> Settings</strong> (Configuración).
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s3-c2" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            En el menú de opciones lateral izquierdo, ve a la sección <strong>Code and automation</strong> y selecciona <strong class="text-github-purple"><i class="fa-solid fa-book-open mr-1 text-xs"></i> Pages</strong>.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s3-c3" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            En el apartado **Build and deployment > Branch**, haz clic en el selector desplegable donde pone <code class="bg-github-darker text-slate-400 px-1 py-0.5 rounded font-mono text-xs">None</code>.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s3-c4" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Selecciona la rama principal de tu proyecto, que suele llamarse <strong class="text-white">main</strong> o <strong class="text-white">master</strong>.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s3-c5" class="mt-1 rounded bg-github-darker border-github-border text-github-purple focus:ring-github-purple h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Deja la carpeta por defecto en <code class="bg-github-darker text-slate-400 px-1 py-0.5 font-mono text-xs">/ (root)</code> y haz clic en el botón <strong class="text-white bg-github-accent px-2 py-1 rounded text-xs font-semibold">Save</strong>.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Step Navigation Action -->
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-mono"><i class="fa-solid fa-clock"></i> Tras guardar, el despliegue tarda unos segundos en procesarse.</span>
+                    <a href="#step4" class="bg-github-card hover:bg-github-border border border-github-border px-4 py-2 rounded-lg text-sm font-semibold text-slate-200 transition flex items-center space-x-2">
+                        <span>Paso Siguiente</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- STEP 4: ¡VER TU WEB! -->
+            <section id="step4" class="bg-github-dark border border-github-border rounded-xl p-6 relative transition duration-300 hover:border-emerald-500/30">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-emerald-500 text-github-darker font-extrabold rounded-xl flex items-center justify-center text-lg shadow-lg shadow-emerald-500/20">
+                    4
+                </div>
+                
+                <div class="flex items-center justify-between mb-4 mt-2">
+                    <h2 class="text-xl md:text-2xl font-bold text-white flex items-center space-x-3">
+                        <i class="fa-solid fa-globe text-emerald-400"></i>
+                        <span>¡Ver tu Página Web en Vivo!</span>
+                    </h2>
+                    <span class="text-xs bg-github-border text-slate-400 px-2 py-1 rounded">Paso 4 de 4</span>
+                </div>
+                
+                <p class="text-slate-300 mb-6 text-sm md:text-base">
+                    ¡El gran momento! Tu página ha sido desplegada en un servidor en la nube de alta disponibilidad y es accesible desde cualquier rincón del mundo.
+                </p>
+
+                <!-- Interactive Step checklist -->
+                <div class="bg-github-card rounded-xl p-4 border border-github-border space-y-3.5 mb-6">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Instrucciones interactivas:</h4>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s4-c1" class="mt-1 rounded bg-github-darker border-github-border text-emerald-500 focus:ring-emerald-500 h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Espera entre 1 y 2 minutos mientras los servidores de GitHub empaquetan y envían tus archivos a la red.
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s4-c2" class="mt-1 rounded bg-github-darker border-github-border text-emerald-500 focus:ring-emerald-500 h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Refresca la pestaña actual de **Settings > Pages** en tu navegador.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s4-c3" class="mt-1 rounded bg-github-darker border-github-border text-emerald-500 focus:ring-emerald-500 h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300 flex-grow">
+                            Observa la parte superior de la página, donde aparecerá un cuadro con el texto: <strong class="text-emerald-400 block sm:inline mt-1 sm:mt-0 font-semibold bg-emerald-950/40 border border-emerald-500/30 px-2 py-0.5 rounded text-xs">Your site is live at: [Tu Enlace]</strong>
+                        </span>
+                    </label>
+
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" id="s4-c4" class="mt-1 rounded bg-github-darker border-github-border text-emerald-500 focus:ring-emerald-500 h-4 w-4" onchange="updateProgress()">
+                        <span class="text-sm text-slate-300">
+                            Haz clic en el enlace provisto para abrir tu nueva web desplegada en internet. ¡Felicidades!
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Congratulations Gimmick Box -->
+                <div id="congrats-card" class="hidden p-5 bg-gradient-to-r from-emerald-950/40 via-github-card to-github-card border border-emerald-500/30 rounded-xl mb-6 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-4xl">🎉</div>
+                    <div class="text-center md:text-left flex-grow">
+                        <h4 class="font-bold text-white text-base">¡Enhorabuena, completaste todo el tutorial!</h4>
+                        <p class="text-xs text-slate-400">Ahora puedes compartir la URL de tu web con tus amigos, familiares, o ponerla en tu CV.</p>
+                    </div>
+                    <button onclick="celebrateClick()" class="bg-emerald-500 hover:bg-emerald-600 text-github-darker font-bold px-4 py-2 rounded-lg text-xs transition whitespace-nowrap">
+                        <i class="fa-solid fa-sparkles mr-1"></i>¡Celebrar!
+                    </button>
+                </div>
+
+                <!-- Step Navigation Action -->
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-slate-500 font-mono"><i class="fa-solid fa-share-nodes"></i> Las webs se alojan bajo el dominio tuusuario.github.io</span>
+                    <a href="#updates" class="bg-github-card hover:bg-github-border border border-github-border px-4 py-2 rounded-lg text-sm font-semibold text-slate-200 transition flex items-center space-x-2">
+                        <span>¿Cómo actualizarla?</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- EXTRA: ACTUALIZAR LA WEB EN EL FUTURO -->
+            <section id="updates" class="bg-github-dark border border-github-border rounded-xl p-6 transition duration-300 hover:border-slate-500/30">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center space-x-3">
+                    <i class="fa-solid fa-rotate text-github-blue"></i>
+                    <span>¿Cómo actualizar tu web en el futuro?</span>
+                </h3>
+                <p class="text-slate-300 text-sm md:text-base mb-4 leading-relaxed">
+                    Si modificas tu código en el ordenador o la Inteligencia Artificial genera cambios y quieres que se actualicen en vivo:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-github-card p-4 rounded-lg border border-github-border">
+                        <div class="text-github-blue font-bold text-lg mb-1">01</div>
+                        <h4 class="text-sm font-semibold text-white mb-2">Entra a GitHub</h4>
+                        <p class="text-xs text-slate-400">Navega a tu repositorio en GitHub donde guardaste los archivos.</p>
+                    </div>
+                    <div class="bg-github-card p-4 rounded-lg border border-github-border">
+                        <div class="text-github-blue font-bold text-lg mb-1">02</div>
+                        <h4 class="text-sm font-semibold text-white mb-2">Add File > Upload</h4>
+                        <p class="text-xs text-slate-400">Presiona el menú de arriba a la derecha y selecciona subir archivos.</p>
+                    </div>
+                    <div class="bg-github-card p-4 rounded-lg border border-github-border">
+                        <div class="text-github-blue font-bold text-lg mb-1">03</div>
+                        <h4 class="text-sm font-semibold text-white mb-2">Sube y Commit</h4>
+                        <p class="text-xs text-slate-400">Arrastra tus archivos nuevos (sobrescribirán los viejos) y confirma los cambios.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXTRA: ALTERNATIVA AVANZADA CON GIT -->
+            <section id="git-advanced" class="bg-github-dark border border-github-border rounded-xl p-6 transition duration-300 hover:border-github-purple/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-white flex items-center space-x-3">
+                        <i class="fa-solid fa-terminal text-github-purple"></i>
+                        <span>Alternativa Avanzada: Flujo de Consola con Git</span>
+                    </h3>
+                    <span class="text-xs font-mono bg-github-purple/10 text-github-purple border border-github-purple/20 px-2 py-0.5 rounded">Para el futuro</span>
+                </div>
+                <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
+                    Cuando tu proyecto crezca o hagas actualizaciones muy frecuentes, te resultará más cómodo utilizar la consola de comandos de Git.
+                </p>
+
+                <!-- Command Reference -->
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs font-semibold text-slate-400">Inicializar y subir por primera vez</span>
+                            <button onclick="copyToClipboard('git-init-code', this)" class="text-xs text-github-purple hover:text-white transition flex items-center space-x-1">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                        <pre class="bg-github-card p-4 rounded-lg border border-github-border text-xs md:text-sm text-github-blue font-mono overflow-x-auto"><code id="git-init-code">git init
+git add .
+git commit -m "Mi primer commit"
+git branch -M main
+git remote add origin https://github.com/TU-USUARIO/TU-REPOSITORIO.git
+git push -u origin main</code></pre>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs font-semibold text-slate-400">Actualizar cambios más adelante</span>
+                            <button onclick="copyToClipboard('git-update-code', this)" class="text-xs text-github-purple hover:text-white transition flex items-center space-x-1">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                        <pre class="bg-github-card p-4 rounded-lg border border-github-border text-xs md:text-sm text-github-blue font-mono overflow-x-auto"><code id="git-update-code">git add .
+git commit -m "Actualizando contenido de la web"
+git push origin main</code></pre>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Custom Floating Alert Box for Copy actions -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-github-card border border-github-border p-4 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <p id="toast-message" class="text-sm font-semibold text-white">Comando copiado</p>
+            <p class="text-xs text-slate-400">Listo para pegar en tu consola.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-github-dark border-t border-github-border py-8 px-4 mt-12 text-center text-slate-500 text-xs">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div class="flex items-center space-x-2">
+                <i class="fa-brands fa-github text-lg text-slate-400"></i>
+                <span>Tutorial Interactivo diseñado para publicar páginas web de la IA.</span>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://github.com" target="_blank" class="hover:text-slate-300 transition">GitHub</a>
+                <span class="text-slate-700">•</span>
+                <a href="https://pages.github.com" target="_blank" class="hover:text-slate-300 transition">GitHub Pages</a>
+                <span class="text-slate-700">•</span>
+                <a href="#" class="hover:text-slate-300 transition" onclick="resetAllProgress()">Reiniciar Guía</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactive Logic -->
+    <script>
+        // Total interactive checklist inputs
+        const totalItems = [
+            'req-account', 'req-files', 'req-index',
+            's1-c1', 's1-c2', 's1-c3', 's1-c4', 's1-c5',
+            's2-c1', 's2-c2', 's2-c3', 's2-c4', 's2-c5',
+            's3-c1', 's3-c2', 's3-c3', 's3-c4', 's3-c5',
+            's4-c1', 's4-c2', 's4-c3', 's4-c4'
+        ];
+
+        // Load progress from localstorage on start
+        window.addEventListener('load', () => {
+            totalItems.forEach(id => {
+                const checked = localStorage.getItem(id) === 'true';
+                const el = document.getElementById(id);
+                if (el) {
+                    el.checked = checked;
+                }
+            });
+            updateProgress();
+        });
+
+        // Function to update progress state
+        function updateProgress() {
+            let checkedCount = 0;
+            totalItems.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.checked) {
+                    checkedCount++;
+                    localStorage.setItem(id, 'true');
+                } else {
+                    localStorage.setItem(id, 'false');
+                }
+            });
+
+            // Calculate overall percentage
+            const percentage = Math.round((checkedCount / totalItems.length) * 100);
+            
+            // Update Header progress
+            const progressBar = document.getElementById('header-progress');
+            const percentText = document.getElementById('progress-percent');
+            if (progressBar && percentText) {
+                progressBar.style.width = `${percentage}%`;
+                percentText.innerText = `${percentage}%`;
+            }
+
+            // Update step check navigation highlights
+            checkStepCompletion('step1', ['s1-c1', 's1-c2', 's1-c3', 's1-c4', 's1-c5']);
+            checkStepCompletion('step2', ['s2-c1', 's2-c2', 's2-c3', 's2-c4', 's2-c5']);
+            checkStepCompletion('step3', ['s3-c1', 's3-c2', 's3-c3', 's3-c4', 's3-c5']);
+            checkStepCompletion('step4', ['s4-c1', 's4-c2', 's4-c3', 's4-c4']);
+
+            // Show congratulatory card if 100% complete
+            const congratsCard = document.getElementById('congrats-card');
+            if (congratsCard) {
+                if (percentage === 100) {
+                    congratsCard.classList.remove('hidden');
+                } else {
+                    congratsCard.classList.add('hidden');
+                }
+            }
+        }
+
+        // Helper to check and mark a whole section as complete
+        function checkStepCompletion(stepId, checkboxIds) {
+            const allChecked = checkboxIds.every(id => {
+                const el = document.getElementById(id);
+                return el && el.checked;
+            });
+
+            const navCheck = document.getElementById(`check-nav-${stepId}`);
+            const navLink = document.getElementById(`nav-${stepId}`);
+            
+            if (allChecked) {
+                if (navCheck) navCheck.classList.remove('hidden');
+                if (navLink) {
+                    navLink.classList.add('text-emerald-400');
+                    navLink.classList.remove('text-slate-400');
+                }
+            } else {
+                if (navCheck) navCheck.classList.add('hidden');
+                if (navLink) {
+                    navLink.classList.remove('text-emerald-400');
+                    navLink.classList.add('text-slate-400');
+                }
+            }
+        }
+
+        // Reset all checked boxes and localstorage
+        function resetAllProgress() {
+            totalItems.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.checked = false;
+                localStorage.setItem(id, 'false');
+            });
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showToast('Progreso reiniciado', 'Vuelve a empezar cuando quieras.');
+        }
+
+        // Copy Code utility (with fallbacks compatible with embeds)
+        function copyToClipboard(elementId, button) {
+            const codeEl = document.getElementById(elementId);
+            if (!codeEl) return;
+            
+            // Dynamic text selection
+            const textToCopy = codeEl.innerText;
+            
+            // Using modern and safe fallback methods due to iframe security constraints
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed'; // Avoid scrolling to bottom
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('¡Copiado al portapapeles!', 'Ya puedes pegarlo en tu consola.');
+                    // Temporarily change button icon/text
+                    const originalHTML = button.innerHTML;
+                    button.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> <span class="text-emerald-400 font-bold">¡Copiado!</span>';
+                    setTimeout(() => {
+                        button.innerHTML = originalHTML;
+                    }, 2000);
+                } else {
+                    showToast('Error', 'No se ha podido copiar.');
+                }
+            } catch (err) {
+                showToast('Error', 'No se ha podido copiar.');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Show floating message (Toast)
+        function showToast(title, body) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            if (toast && toastMessage) {
+                toastMessage.innerText = title;
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+                
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                }, 3000);
+            }
+        }
+
+        // Celebrate Click fun trigger
+        function celebrateClick() {
+            showToast('🎉 ¡Excelente Trabajo!', 'Has aprendido una de las mejores habilidades web.');
+        }
+    </script>
+</body>
+</html>

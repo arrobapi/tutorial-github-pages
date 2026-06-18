@@ -479,29 +479,42 @@
             </section>
 
             <!-- EXTRA: ACTUALIZAR LA WEB EN EL FUTURO -->
-            <section id="updates" class="bg-github-dark border border-github-border rounded-xl p-6 transition duration-300 hover:border-slate-500/30">
+            <section id="updates" class="bg-github-dark border border-github-border rounded-xl p-6 transition duration-300 hover:border-github-blue/30">
                 <h3 class="text-xl font-bold text-white mb-4 flex items-center space-x-3">
                     <i class="fa-solid fa-rotate text-github-blue"></i>
-                    <span>¿Cómo actualizar tu web en el futuro?</span>
+                    <span>¿Cómo actualizar y subir cambios a tu web?</span>
                 </h3>
-                <p class="text-slate-300 text-sm md:text-base mb-4 leading-relaxed">
-                    Si modificas tu código en el ordenador o la Inteligencia Artificial genera cambios y quieres que se actualicen en vivo:
+                <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
+                    Si modificas tu código o la Inteligencia Artificial genera una nueva versión mejorada, no necesitas crear otro repositorio. Puedes actualizar el diseño actual <strong>sobrescribiendo</strong> los archivos existentes de manera muy fácil:
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-github-card p-4 rounded-lg border border-github-border">
-                        <div class="text-github-blue font-bold text-lg mb-1">01</div>
-                        <h4 class="text-sm font-semibold text-white mb-2">Entra a GitHub</h4>
-                        <p class="text-xs text-slate-400">Navega a tu repositorio en GitHub donde guardaste los archivos.</p>
+                <div class="space-y-4">
+                    <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                        <div class="bg-github-blue/10 text-github-blue font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">01</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-1">Entra a tu Repositorio</h4>
+                            <p class="text-xs text-slate-400">Inicia sesión en GitHub, busca tu repositorio en la lista de la izquierda y haz clic en él para abrir la vista de archivos.</p>
+                        </div>
                     </div>
-                    <div class="bg-github-card p-4 rounded-lg border border-github-border">
-                        <div class="text-github-blue font-bold text-lg mb-1">02</div>
-                        <h4 class="text-sm font-semibold text-white mb-2">Add File > Upload</h4>
-                        <p class="text-xs text-slate-400">Presiona el menú de arriba a la derecha y selecciona subir archivos.</p>
+                    <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                        <div class="bg-github-blue/10 text-github-blue font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">02</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-1">Ve a Add file > Upload files</h4>
+                            <p class="text-xs text-slate-400">En la parte superior derecha de la lista de tus archivos, localiza el botón desplegable que dice <strong class="text-white bg-github-border px-2 py-0.5 rounded text-xs">Add file <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i></strong>, haz clic en él y selecciona <strong class="text-white bg-github-border px-2 py-0.5 rounded text-xs"><i class="fa-solid fa-cloud-arrow-up mr-1 text-[10px]"></i> Upload files</strong>.</p>
+                        </div>
                     </div>
-                    <div class="bg-github-card p-4 rounded-lg border border-github-border">
-                        <div class="text-github-blue font-bold text-lg mb-1">03</div>
-                        <h4 class="text-sm font-semibold text-white mb-2">Sube y Commit</h4>
-                        <p class="text-xs text-slate-400">Arrastra tus archivos nuevos (sobrescribirán los viejos) y confirma los cambios.</p>
+                    <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                        <div class="bg-github-blue/10 text-github-blue font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">03</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-1">Arrastra los nuevos archivos</h4>
+                            <p class="text-xs text-slate-400">Arrastra tus archivos modificados al área de carga. <strong class="text-amber-400">Clave:</strong> Tienen que llamarse exactamente igual que los anteriores (por ejemplo, <code class="bg-github-darker text-github-blue px-1.5 py-0.5 rounded font-mono text-xs">index.html</code>) para que el sistema los reemplace automáticamente.</p>
+                        </div>
+                    </div>
+                    <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                        <div class="bg-github-blue/10 text-github-blue font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">04</div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white mb-1">Confirma los cambios (Commit)</h4>
+                            <p class="text-xs text-slate-400">Baja hasta la sección <strong>Commit changes</strong>, escribe una breve descripción de tus cambios (ej. <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Actualización de diseño"</code>) y haz clic en el botón verde. En 1-2 minutos la web se actualizará sola.</p>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,6 +64,119 @@
         .glow-blue {
             box-shadow: 0 0 25px -5px rgba(88, 166, 255, 0.15);
         }
+
+        /* ===== LIGHT MODE OVERRIDES ===== */
+        html.light body,
+        html.light {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #f0f2f5;
+            --border-color: #d0d7de;
+            --text-primary: #1f2328;
+            --text-secondary: #24292f;
+            --text-tertiary: #656d76;
+            --text-muted: #8b949e;
+            --accent-purple: #8250df;
+            --accent-blue: #0969da;
+            --accent-green: #1a7f37;
+            --card-shadow: 0 1px 3px rgba(31, 35, 40, 0.08), 0 1px 2px rgba(31, 35, 40, 0.06);
+        }
+
+        html.light body {
+            background-color: #f6f8fa !important;
+            color: #1f2328 !important;
+        }
+
+        /* Background overrides */
+        html.light .bg-github-darker { background-color: #f6f8fa !important; }
+        html.light .bg-github-dark { background-color: #ffffff !important; }
+        html.light .bg-github-card { background-color: #f6f8fa !important; }
+        html.light .bg-github-border { background-color: #d0d7de !important; }
+
+        /* Border overrides */
+        html.light .border-github-border { border-color: #d0d7de !important; }
+        html.light .border-github-border\/50 { border-color: rgba(208, 215, 222, 0.5) !important; }
+
+        /* Text overrides */
+        html.light .text-slate-100,
+        html.light .text-slate-200,
+        html.light .text-slate-300 { color: #1f2328 !important; }
+        html.light .text-slate-400 { color: #656d76 !important; }
+        html.light .text-slate-500 { color: #8b949e !important; }
+        html.light .text-white { color: #1f2328 !important; }
+        html.light .text-slate-700 { color: #8b949e !important; }
+
+        /* Keep white text on colored backgrounds */
+        html.light .bg-github-accent,
+        html.light .bg-github-accentHover,
+        html.light .hover\:bg-github-accent:hover { color: #ffffff !important; }
+        html.light .bg-github-accent .text-white,
+        html.light .bg-github-accentHover .text-white { color: #ffffff !important; }
+        html.light button.bg-github-accent,
+        html.light button.bg-github-accentHover { color: #ffffff !important; }
+
+        /* Purple badge/buttons keep their contrast */
+        html.light .bg-github-purple { color: #ffffff !important; }
+        html.light .bg-github-purple\/10 { background-color: rgba(130, 80, 223, 0.08) !important; }
+        html.light .border-github-purple\/20 { border-color: rgba(130, 80, 223, 0.2) !important; }
+        html.light .border-github-purple\/30 { border-color: rgba(130, 80, 223, 0.3) !important; }
+
+        /* Blue badge/buttons */
+        html.light .bg-github-blue\/10 { background-color: rgba(9, 105, 218, 0.08) !important; }
+        html.light .border-github-blue\/20 { border-color: rgba(9, 105, 218, 0.2) !important; }
+
+        /* Emerald/green */
+        html.light .bg-emerald-500\/10 { background-color: rgba(26, 127, 55, 0.08) !important; }
+        html.light .border-emerald-500\/20 { border-color: rgba(26, 127, 55, 0.2) !important; }
+        html.light .bg-emerald-950\/40 { background-color: rgba(26, 127, 55, 0.08) !important; }
+        html.light .border-emerald-500\/30 { border-color: rgba(26, 127, 55, 0.3) !important; }
+
+        /* Amber */
+        html.light .bg-amber-500\/10 { background-color: rgba(191, 135, 0, 0.08) !important; }
+        html.light .border-amber-500\/20 { border-color: rgba(191, 135, 0, 0.2) !important; }
+
+        /* Gradient text overrides */
+        html.light .from-white { --tw-gradient-from: #1f2328 !important; }
+        html.light .via-slate-200 { --tw-gradient-via: #656d76 !important; }
+        html.light .to-slate-400 { --tw-gradient-to: #8b949e !important; }
+        html.light .via-github-blue { --tw-gradient-via: #0969da !important; }
+        html.light .to-emerald-400 { --tw-gradient-to: #1a7f37 !important; }
+
+        /* Header and hero */
+        html.light .bg-github-dark\/80 { background-color: rgba(255, 255, 255, 0.8) !important; }
+        html.light .from-github-dark { --tw-gradient-from: #ffffff !important; }
+        html.light .to-github-darker { --tw-gradient-to: #f6f8fa !important; }
+
+        /* Card shadows for light mode */
+        html.light .glow-purple { box-shadow: 0 0 25px -5px rgba(130, 80, 223, 0.1) !important; }
+        html.light .glow-green { box-shadow: 0 0 25px -5px rgba(26, 127, 55, 0.1) !important; }
+        html.light .glow-blue { box-shadow: 0 0 25px -5px rgba(9, 105, 218, 0.1) !important; }
+
+        /* Hover states */
+        html.light .hover\:bg-github-card:hover { background-color: #f0f2f5 !important; }
+        html.light .hover\:bg-github-border:hover { background-color: #d0d7de !important; }
+        html.light .hover\:text-white:hover { color: #1f2328 !important; }
+        html.light .hover\:text-slate-300:hover { color: #656d76 !important; }
+
+        /* Code blocks */
+        html.light code.bg-github-darker { background-color: #f0f2f5 !important; }
+
+        /* Toast */
+        html.light #toast { background-color: #ffffff !important; }
+
+        /* === Theme Toggle Button === */
+        #theme-toggle {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #theme-toggle:hover {
+            transform: rotate(15deg);
+        }
+        html.light #theme-toggle .fa-moon { display: none; }
+        html.light #theme-toggle .fa-sun { display: inline-block; }
+        html:not(.light) #theme-toggle .fa-sun { display: none; }
+        html:not(.light) #theme-toggle .fa-moon { display: inline-block; }
+
     </style>
 </head>
 <body class="bg-github-darker text-slate-100 font-sans min-h-screen flex flex-col antialiased">
@@ -74,9 +187,17 @@
             <div class="flex items-center space-x-3">
                 <i class="fa-brands fa-github text-3xl text-white"></i>
                 <span class="font-bold text-lg tracking-tight hidden sm:inline-block">
-                    Arena<span class="text-github-purple">To</span>Pages <span class="text-xs font-mono font-normal bg-github-border px-2 py-0.5 rounded ml-2">v1.2</span>
+                    ArenaAI<span class="text-github-purple">To</span>GithubPages <span class="text-xs font-mono font-normal bg-github-border px-2 py-0.5 rounded ml-2">v1.2</span>
                 </span>
             </div>
+
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" onclick="toggleTheme()" 
+                class="w-9 h-9 flex items-center justify-center rounded-lg bg-github-card border border-github-border text-slate-300 hover:text-white hover:border-github-purple/50 transition"
+                title="Cambiar modo claro/oscuro" aria-label="Cambiar tema">
+                <i class="fa-solid fa-moon text-github-purple text-sm"></i>
+                <i class="fa-solid fa-sun text-amber-400 text-sm"></i>
+            </button>
             
             <!-- Tab Navigation inside header -->
             <div class="flex bg-github-darker border border-github-border p-1 rounded-xl">
@@ -803,6 +924,32 @@ git push origin main</code></pre>
 
     <!-- JavaScript Interactive Logic -->
     <script>
+        // ===== THEME MANAGEMENT =====
+        (function() {
+            const savedTheme = localStorage.getItem('arena-theme');
+            if (savedTheme === 'light') {
+                document.getElementById('html-root').classList.add('light');
+            } else {
+                // Default to dark: remove light class (in case it was added)
+                document.getElementById('html-root').classList.remove('light');
+                if (!savedTheme) {
+                    localStorage.setItem('arena-theme', 'dark');
+                }
+            }
+        })();
+
+        function toggleTheme() {
+            const html = document.getElementById('html-root');
+            const isLight = html.classList.contains('light');
+            if (isLight) {
+                html.classList.remove('light');
+                localStorage.setItem('arena-theme', 'dark');
+            } else {
+                html.classList.add('light');
+                localStorage.setItem('arena-theme', 'light');
+            }
+        }
+
         // Total interactive checklist inputs
         const totalItems = [
             'req-account', 'req-files', 'req-index',
@@ -994,5 +1141,5 @@ git push origin main</code></pre>
             showToast('🎉 ¡Excelente Trabajo!', 'Has aprendido una de las mejores habilidades web.');
         }
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0fc50e58e56e17e',t:'MTc4MjE0MjQ1NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

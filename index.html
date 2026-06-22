@@ -697,11 +697,18 @@
                     <span>¿Cómo actualizar y subir cambios de Arena AI a tu web?</span>
                 </h3>
                 <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
-                    Si le pides mejoras a la IA de Arena y descargas una nueva versión de tu página, no necesitas crear otro repositorio. Puedes actualizar el diseño actual <strong>sobrescribiendo</strong> los archivos existentes de manera muy fácil:
+                    Si le pides mejoras a la IA de Arena, no necesitas crear otro repositorio. Puedes actualizar el diseño actual <strong>sobrescribiendo</strong> los archivos existentes. Tienes <strong class="text-white">dos métodos</strong> para hacerlo:
                 </p>
-                <div class="space-y-4">
-                    <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
-                        <div class="bg-github-blue/10 text-github-blue font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">01</div>
+                <!-- MÉTODO 1: DESCARGAR Y SUBIR -->
+                <div class="mb-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="bg-github-blue/10 text-github-blue text-xs font-bold px-3 py-1 rounded-full border border-github-blue/20">Método 1</span>
+                        <h4 class="text-base font-semibold text-white">Descargar el archivo de Arena y subirlo a GitHub</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-4">El método clásico: descargas el proyecto desde Arena AI a tu ordenador y arrastras los archivos a GitHub.</p>
+                    <div class="space-y-4">
+                        <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                            <div class="bg-github-blue/10 text-github-blue font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">01</div>
                         <div>
                             <h4 class="text-sm font-semibold text-white mb-1">Entra a tu Repositorio</h4>
                             <p class="text-xs text-slate-400">Inicia sesión en GitHub, busca tu repositorio en la lista de la izquierda y haz clic en él para abrir la vista de archivos.</p>
@@ -726,6 +733,49 @@
                         <div>
                             <h4 class="text-sm font-semibold text-white mb-1">Confirma los cambios (Commit)</h4>
                             <p class="text-xs text-slate-400">Baja hasta la sección <strong>Commit changes</strong>, escribe una breve descripción de tus cambios (ej. <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Actualización de diseño con Arena"</code>) y haz clic en el botón verde. En 1-2 minutos la web se actualizará sola.</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- MÉTODO 2: COPIAR Y PEGAR (TRUCO RÁPIDO) -->
+                <div class="mt-6 bg-gradient-to-r from-github-purple/5 via-github-card to-github-card border border-github-purple/20 rounded-xl p-5">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="bg-github-purple/10 text-github-purple text-xs font-bold px-3 py-1 rounded-full border border-github-purple/20">Método 2</span>
+                        <h4 class="text-base font-semibold text-white">Copiar y pegar el código directamente <span class="text-xs font-mono bg-github-purple/10 text-github-purple border border-github-purple/20 px-2 py-0.5 rounded ml-2">⚡ Más rápido</span></h4>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4">Este truco te ahorra tener que descargar y subir archivos. Simplemente copias el código HTML que ves en Arena AI y lo pegas directamente en GitHub.</p>
+
+                    <div class="space-y-4">
+                        <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                            <div class="bg-github-purple/10 text-github-purple font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">A</div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white mb-1">En Arena AI: visualiza y copia el código</h4>
+                                <p class="text-xs text-slate-400">Cuando el agente de Arena termine de generar tu web, verás el código HTML directamente en pantalla. Haz <strong class="text-github-purple">CTRL + A</strong> para seleccionar todo el código y luego <strong class="text-github-purple">CTRL + C</strong> para copiarlo al portapapeles.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                            <div class="bg-github-purple/10 text-github-purple font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">B</div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white mb-1">En GitHub: abre el archivo a editar</h4>
+                                <p class="text-xs text-slate-400">Entra a tu repositorio en GitHub, navega hasta el archivo que quieres actualizar (<code class="bg-github-darker text-github-blue px-1.5 py-0.5 rounded font-mono text-xs">index.html</code> u otro) y haz clic en él. Luego pulsa el icono del lápiz <strong class="text-white"><i class="fa-solid fa-pencil text-[10px] mr-0.5"></i> Edit this file</strong> (arriba a la derecha del código).</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-github-card p-4 rounded-lg border border-github-border flex items-start space-x-4">
+                            <div class="bg-github-purple/10 text-github-purple font-mono font-bold text-base rounded-full w-8 h-8 flex items-center justify-center shrink-0">C</div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white mb-1">Selecciona, pega y confirma</h4>
+                                <p class="text-xs text-slate-400">Una vez en el editor: <strong class="text-github-purple">CTRL + A</strong> para seleccionar todo el contenido antiguo, <strong class="text-github-purple">CTRL + V</strong> para pegar el nuevo código de Arena, baja hasta <strong>Commit changes</strong>, escribe una descripción (ej. <code class="bg-github-darker text-slate-400 px-1.5 py-0.5 rounded font-mono text-xs">"Actualización de diseño con Arena"</code>) y haz clic en el botón verde <strong class="text-white bg-github-accent px-2 py-0.5 rounded text-xs">Commit changes</strong>. ¡En 1-2 minutos tu web estará actualizada!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 flex items-start space-x-3">
+                        <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                        <div>
+                            <p class="text-xs text-slate-300"><strong class="text-amber-400">Consejo:</strong> Este método es ideal cuando solo has modificado el archivo <code class="bg-github-darker text-amber-400 px-1.5 py-0.5 rounded font-mono text-xs">index.html</code>. Si tu proyecto tiene varios archivos (CSS, JS, imágenes), el Método 1 (descargar y subir) puede ser más cómodo para no tener que copiar y pegar uno por uno.</p>
                         </div>
                     </div>
                 </div>
@@ -1321,5 +1371,5 @@ git push origin main</code></pre>
             showToast('🎉 ¡Excelente Trabajo!', 'Has aprendido una de las mejores habilidades web.');
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0fc65850e91037f',t:'MTc4MjE0MzI5OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0fc7127be9ca5f5',t:'MTc4MjE0Mzc3NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
